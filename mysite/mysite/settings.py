@@ -12,6 +12,24 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
+from django.db import models
+
+class Item(models.Model):
+    TITLE_CHOICES = [
+        ('lost', 'Lost'),
+        ('found', 'Found'),
+    ]
+
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    item_type = models.CharField(max_length=10, choices=TITLE_CHOICES)
+    location = models.CharField(max_length=100)
+    date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
